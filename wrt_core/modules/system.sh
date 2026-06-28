@@ -297,14 +297,19 @@ update_nss_diag() {
 }
 
 update_menu_location() {
-    local samba4_path="$BUILD_DIR/feeds/luci/applications/luci-app-samba4/root/usr/share/luci/menu.d/luci-app-samba4.json"
-    if [ -d "$(dirname "$samba4_path")" ] && [ -f "$samba4_path" ]; then
-        sed -i 's/nas/services/g' "$samba4_path"
+    local openlist_path="$BUILD_DIR/feeds/luci/applications/luci-app-openlist/root/usr/share/luci/menu.d/luci-app-openlist.json"
+    if [ -d "$(dirname "$openlist_path")" ] && [ -f "$openlist_path" ]; then
+        sed -i 's/services/nas/g' "$openlist_path"
     fi
 
     local tailscale_path="$(get_custom_feed_worktree_dir)/luci-app-tailscale/root/usr/share/luci/menu.d/luci-app-tailscale.json"
     if [ -d "$(dirname "$tailscale_path")" ] && [ -f "$tailscale_path" ]; then
         sed -i 's/services/vpn/g' "$tailscale_path"
+    fi
+
+	local qbittorrent_path="$BUILD_DIR/feeds/luci/applications/luci-app-qbittorrent/root/usr/share/luci/menu.d/luci-app-qbittorrent.json"
+    if [ -d "$(dirname "$qbittorrent_path")" ] && [ -f "$qbittorrent_path" ]; then
+        sed -i 's/services/nas/g' "$qbittorrent_path"
     fi
 }
 
